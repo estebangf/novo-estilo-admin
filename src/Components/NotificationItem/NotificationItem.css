@@ -1,0 +1,15 @@
+.NotificationItem {
+
+}
+
+.NotificationItemUnread {
+  background-color: #dde6ff !important;
+}
+
+.NotificationInformation {
+  flex: 1;
+}
+
+.NotificationInformation .Description {
+  white-space: initial;
+}
