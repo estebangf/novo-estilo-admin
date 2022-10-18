@@ -13,6 +13,7 @@ import { useApp } from './Tools/Hooks';
 import AuthProvider from './Auth/AuthProvider';
 import TurnsList from './Pages/Turns';
 import TurnsToDay from './Pages/Turns/TurnsToDay';
+import TurnsOfMont from './Pages/Turns/TurnsOfMont';
 
 function App() {
   const app = useApp()
@@ -30,6 +31,7 @@ function App() {
               {/* <Route path="/admin" element={<RequireAuth required={true}><Layout /></RequireAuth>}> */}
               <Route path="/turns/list" element={<TurnsList />} />
               <Route path="/turns/today" element={<TurnsToDay />} />
+              <Route path="/turns/month" element={<TurnsOfMont />} />
               {/* </Route> */}
             </Route>
             <Route path="/about" element={<About />} />

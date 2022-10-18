@@ -66,7 +66,7 @@ function TurnsList() {
     })
 
     setTurnsList([...dates])
-  }, [turns, desde, hasta, viewReserveds])
+  }, [turns, desde, hasta, viewReserveds, viewOpeneds])
 
   const handleChangeView = (index: number) => {
     setDateView(prev => prev === index ? undefined : index)
@@ -86,7 +86,7 @@ function TurnsList() {
   }
   function handleChangeNewTurn(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     // console.log("new turn: ", e.target.value, new Date(e.target.value))
-    setNewTurn({ createdAt: new Date(), date: new Date(e.target.value), reservedBy: null })
+    setNewTurn({ createdAt: new Date(), date: new Date(e.target.value), reservedBy: null, works: []})
   }
 
   function setDesdeHandle(value: string) {
@@ -177,7 +177,7 @@ function TurnsList() {
         in={true}
       >
         <Fab
-          onClick={e => handleViewNewTurn({ createdAt: new Date(), date: new Date(), reservedBy: null })}
+          onClick={e => handleViewNewTurn({ createdAt: new Date(), date: new Date(), reservedBy: null, works: [] })}
           sx={{
             position: "fixed",
             bottom: 12,

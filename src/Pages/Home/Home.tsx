@@ -29,12 +29,12 @@ const tarjetas = [
     disabled: false,
     roles: ["admin"]
   }, {
-    title: "Agenda de turnos mensual",
+    title: "Agenda mensual de turnos",
     subTitle: "Aquí verás los turnos actualmente fijados y que debes atender.",
     description: "Calendario mensual",
     image: "/statics/imagens/menus/agenda_mensual.png",
     link: "/turns/month",
-    disabled: true,
+    disabled: false,
     roles: ["admin"]
   }, {
     title: "Nuevo Movimiento",

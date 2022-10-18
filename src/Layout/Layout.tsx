@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import AppBarStyled from "../Components/AppBarStyled/AppBarStyled";
 import AppMenu from "../Components/AppMenu/AppMenu";
 import Main from "../Components/Main/Main";
+import UpdateList from "../Components/Updates/UpdateList";
 
 function Layout() {
   const [openDrawerMovile, setOpenDrawerMovile] = useState(false);
@@ -16,6 +17,7 @@ function Layout() {
       }} open={openDrawerDesktop}>
         <AppBarStyled openDrawerDesktop={openDrawerDesktop} setOpenDrawerMovile={setOpenDrawerMovile} setOpenDrawerDesktop={setOpenDrawerDesktop} />
         <Outlet />
+        <UpdateList />
       </Main>
     </div >
   );

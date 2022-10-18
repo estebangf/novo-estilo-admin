@@ -1,0 +1,66 @@
+.TurnsOfMont {
+}
+
+.TurnsOfMont .Content {
+  padding-top: 32px;
+  padding-bottom: 100px;
+}
+
+
+.TurnsOfMont .Content tr th{
+  border: solid 1px #dbdbdb;
+  border-top: 0
+}
+
+.TurnsOfMont .Content tr th:last-child {
+  border-right: 0;
+}
+
+.TurnsOfMont .Content tr th:first-child {
+  border-left: 0;
+}
+
+
+.TurnsOfMont .Content tr td{
+  border: solid 1px #dbdbdb;
+  vertical-align: text-top;
+}
+
+.TurnsOfMont .Content tr td .day{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.TurnsOfMont .Content tr td:last-child {
+  border-right: 0;
+}
+
+.TurnsOfMont .Content tr td:first-child {
+  border-left: 0;
+}
+
+.PropieritiView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* padding: 6px 0px; */
+}
+.PropieritiView .PropieritiIcon {
+  padding-right: 12px;
+}
+
+.PropieritiView .LinkWhatsapp {
+  text-decoration: none;
+  padding-left: 12px;
+}
+
+
+/* .TurnsOfMont .Content .Dia {
+  width: 100%;
+}
+
+.TurnsOfMont .Content .Dia .Vacio {
+    height: 50px;
+} */
