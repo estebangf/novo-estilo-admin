@@ -71,10 +71,6 @@ function TurnsList() {
   const handleChangeView = (index: number) => {
     setDateView(prev => prev === index ? undefined : index)
   }
-  function handleChangeDialogTurn(turn?: Turn): void {
-    setDialogTurn(turn)
-  }
-
 
   function setDesdeHandle(value: string) {
     let dateExtra = new Date(value);
@@ -182,7 +178,7 @@ function TurnsList() {
         in={true}
       >
         <Fab
-          onClick={e => handleChangeDialogTurn({
+          onClick={e => setDialogTurn({
             createdAt: new Date(),
             date: new Date(),
             reservedBy: null,
@@ -201,7 +197,7 @@ function TurnsList() {
       {dialogTurn &&
         <DialogTurn
           turn={dialogTurn}
-          handleChangeDialogTurn={handleChangeDialogTurn}
+          handleChangeDialogTurn={setDialogTurn}
           handleSaveTurn={handleSaveTurn}
         />
       }

@@ -14,6 +14,7 @@ function DialogTurn({
   handleSaveTurn,
 }: Props) {
 
+  console.log(turn)
 
 
   function handleChangeDateTurn(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {

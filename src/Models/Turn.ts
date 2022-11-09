@@ -68,7 +68,7 @@ const turnConverter = {
       createdAt: data.createdAt.toDate(),
       date: data.date.toDate(),
       reservedBy: data.reservedBy,
-      works: data.works,
+      works: data.works || [],
       allowedWorks: data.allowedWorks || []
     }
     return newTurn;
