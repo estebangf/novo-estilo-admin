@@ -2,6 +2,7 @@ import { DocumentData } from "firebase/firestore"
 
 import { Timestamp } from "firebase/firestore"
 import Unregistred from "./Unregistred"
+import { WorkNameType } from "./Work"
 
 const TURNS_COLLECTION = "turns"
 
@@ -10,7 +11,8 @@ interface Turn {
   createdAt: Date
   date: Date
   reservedBy: Unregistred | null
-  works: string[]
+  allowedWorks: WorkNameType[]
+  works: WorkNameType[]
 }
 const getDate = (turn: Turn) => {
   return turn.date.toLocaleDateString()
@@ -32,11 +34,8 @@ const getTime = (turn: Turn) => {
   return turn.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 const getFullDate = (turn: Turn) => {
-  console.log("date => ", turn.date)
   let dateExtra = new Date(turn.date);
-  console.log("dateExtra => ", dateExtra)
   dateExtra.setMinutes(dateExtra.getMinutes() - dateExtra.getTimezoneOffset());
-  console.log("dateExtra => ", dateExtra)
   return dateExtra.toISOString().slice(0, 16);
   // return dateExtra.toISOString().split(":00.000")[0]; // "yyyy-MM-ddThh:mm"
 }
@@ -58,7 +57,8 @@ const turnConverter = {
       createdAt: Timestamp.fromDate(turn.createdAt),
       date: Timestamp.fromDate(turn.date),
       reservedBy: turn.reservedBy,
-      works: turn.works
+      works: turn.works,
+      allowedWorks: turn.allowedWorks
     }
   },
   fromFirestore: (snapshot: DocumentData, options: any) => {
@@ -68,7 +68,8 @@ const turnConverter = {
       createdAt: data.createdAt.toDate(),
       date: data.date.toDate(),
       reservedBy: data.reservedBy,
-      works: data.works
+      works: data.works,
+      allowedWorks: data.allowedWorks || []
     }
     return newTurn;
   },
@@ -83,7 +84,8 @@ const generateTurn = (number: number) => {
       name: "Nombre y apellido...",
       phone: 2944617548
     } : null,
-    works: []
+    works: [],
+    allowedWorks: []
   }
 }
 const turnsExamples: Turn[] = Array.from(Array(Math.ceil(Math.random() * 15)).keys()).map(e => generateTurn(Math.ceil(Math.random() * 500000000) + 1650000000000))

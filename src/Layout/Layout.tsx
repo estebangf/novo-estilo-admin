@@ -13,6 +13,7 @@ function Layout() {
       <AppMenu setOpenDrawerMovile={setOpenDrawerMovile} openDrawerMovile={openDrawerMovile} setOpenDrawerDesktop={setOpenDrawerDesktop} openDrawerDesktop={openDrawerDesktop} />
       <Main sx={{
         position: "relative",
+        flexGrow: 1,
         width: "100%",
       }} open={openDrawerDesktop}>
         <AppBarStyled openDrawerDesktop={openDrawerDesktop} setOpenDrawerMovile={setOpenDrawerMovile} setOpenDrawerDesktop={setOpenDrawerDesktop} />

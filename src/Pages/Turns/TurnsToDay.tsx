@@ -51,7 +51,7 @@ function TurnsToDay() {
       <TurnsImage turns={turns} extended={true} />
       {turns.map((turn, index) => {
         return (
-          <TurnItem turn={turn} />
+          <TurnItem handleEdit={() => alert("No puedes editar desde aqui aun")} turn={turn} />
         )
       })}
     </Box>

@@ -1,10 +1,12 @@
 import { Add, ExpandLess, ExpandMore, Inbox } from "@mui/icons-material";
 import { Box, Button, Collapse, Dialog, DialogActions, DialogTitle, Fab, FormControlLabel, FormGroup, IconButton, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Paper, Switch, TextField, Zoom } from "@mui/material";
-import { addDoc, collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import DialogTurn from "../../Components/DialogTurn/DialogTurn";
 import TurnItem from "../../Components/TurnItem";
 import TurnsImage from "../../Components/TurnsImage";
-import Turn, { getDate, getFullDate, turnConverter, TurnsListExtra, TURNS_COLLECTION } from "../../Models/Turn";
+import Turn, { getDate, getFullDate, getNewDateWithNewTime, turnConverter, TurnsListExtra, TURNS_COLLECTION } from "../../Models/Turn";
+import { Works } from "../../Models/Work";
 import { getDateValue } from "../../Tools";
 import { useApp } from "../../Tools/Hooks";
 
@@ -21,7 +23,7 @@ function TurnsList() {
   const [viewOpeneds, setViewOpeneds] = useState(true)
   const [turns, setTurns] = useState<Turn[]>([])
   const [turnsList, setTurnsList] = useState<TurnsListExtra>([])
-  const [newTurn, setNewTurn] = useState<Turn>()
+  const [dialogTurn, setDialogTurn] = useState<Turn>()
 
   useEffect(() => {
     // const q = query(collection(db, TURNS_COLLECTION), where("date", ">", "CA"));
@@ -43,8 +45,6 @@ function TurnsList() {
     let fin = new Date(hasta);
     fin.setHours(23, 59, 59, 999);
 
-    console.log("inicio: ", inicio)
-    console.log("fin: ", fin)
     return turns
       .filter(t => t.date > inicio)
       .filter(t => t.date < fin)
@@ -71,23 +71,10 @@ function TurnsList() {
   const handleChangeView = (index: number) => {
     setDateView(prev => prev === index ? undefined : index)
   }
-  function handleViewNewTurn(turn?: Turn): void {
-    setNewTurn(turn)
+  function handleChangeDialogTurn(turn?: Turn): void {
+    setDialogTurn(turn)
   }
-  function handleSaveNewTurn(): void {
-    if (newTurn)
-      // setTurns(prev => [...prev, newTurn])
-      addDoc(collection(app.firestore, TURNS_COLLECTION).withConverter(turnConverter), newTurn).then(r => {
-        console.log("added new turn: ", r)
-        setNewTurn(undefined)
-      }).catch(e => {
-        console.error("error new turn: ", e)
-      })
-  }
-  function handleChangeNewTurn(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
-    // console.log("new turn: ", e.target.value, new Date(e.target.value))
-    setNewTurn({ createdAt: new Date(), date: new Date(e.target.value), reservedBy: null, works: []})
-  }
+
 
   function setDesdeHandle(value: string) {
     let dateExtra = new Date(value);
@@ -100,6 +87,24 @@ function TurnsList() {
     dateExtra.setMinutes(dateExtra.getMinutes() + dateExtra.getTimezoneOffset());
 
     setHasta(dateExtra)
+  }
+
+
+  function handleSaveTurn(): void {
+    if (!dialogTurn) return;
+
+    if (dialogTurn.id)
+      updateDoc(doc(app.firestore, TURNS_COLLECTION, dialogTurn.id).withConverter(turnConverter), dialogTurn).then(r => {
+        setDialogTurn(undefined)
+      }).catch(e => {
+        console.error("error new turn: ", e)
+      })
+    else
+      addDoc(collection(app.firestore, TURNS_COLLECTION).withConverter(turnConverter), dialogTurn).then(r => {
+        setDialogTurn(undefined)
+      }).catch(e => {
+        console.error("error new turn: ", e)
+      })
   }
 
 
@@ -166,7 +171,7 @@ function TurnsList() {
             >
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List>
-                  {date.turns.map(turn => <TurnItem turn={turn} />)}
+                  {date.turns.map(turn => <TurnItem handleEdit={() => setDialogTurn(turn)} turn={turn} />)}
                 </List>
               </Collapse>
             </List >
@@ -177,7 +182,13 @@ function TurnsList() {
         in={true}
       >
         <Fab
-          onClick={e => handleViewNewTurn({ createdAt: new Date(), date: new Date(), reservedBy: null, works: [] })}
+          onClick={e => handleChangeDialogTurn({
+            createdAt: new Date(),
+            date: new Date(),
+            reservedBy: null,
+            works: [],
+            allowedWorks: []
+          })}
           sx={{
             position: "fixed",
             bottom: 12,
@@ -187,25 +198,12 @@ function TurnsList() {
           <Add />
         </Fab>
       </Zoom>
-      {newTurn &&
-        <Dialog onClose={() => handleViewNewTurn()} open={!!newTurn}>
-          <DialogTitle>Nuevo turno</DialogTitle>
-          <TextField
-            id="datetime-local"
-            label="Next appointment"
-            type="datetime-local"
-            value={getFullDate(newTurn)}
-            onChange={e => handleChangeNewTurn(e)}
-            sx={{ width: 250 }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <DialogActions>
-            <Button onClick={() => handleViewNewTurn()} color="secondary">Cancelar</Button>
-            <Button onClick={() => handleSaveNewTurn()} variant="contained" color="primary">Guardar</Button>
-          </DialogActions>
-        </Dialog>
+      {dialogTurn &&
+        <DialogTurn
+          turn={dialogTurn}
+          handleChangeDialogTurn={handleChangeDialogTurn}
+          handleSaveTurn={handleSaveTurn}
+        />
       }
     </Box >
   )

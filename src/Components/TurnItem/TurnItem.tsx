@@ -12,16 +12,11 @@ import Turn, { getNewDateWithNewTime, getTime, turnConverter, TURNS_COLLECTION }
 import { useApp } from "../../Tools/Hooks";
 
 interface TurnItemProps {
-  turn: Turn
+  turn: Turn,
+  handleEdit: () => void
 }
-function TurnItem({ turn }: TurnItemProps) {
+function TurnItem({ turn, handleEdit }: TurnItemProps) {
   const app = useApp();
-
-  const [edit, setEdit] = useState<Turn>()
-
-  function handleEdit(): void {
-    setEdit(turn);
-  }
 
   function handleRemove(): void {
     if (window.confirm("¿Vas a borrar este turno?"))
@@ -30,21 +25,6 @@ function TurnItem({ turn }: TurnItemProps) {
           deleteDoc(doc(app.firestore, TURNS_COLLECTION, turn.id!)).then(r => console.log("Deleted ", r)).catch(e => console.log("Deleted error ", e))
       } else
         deleteDoc(doc(app.firestore, TURNS_COLLECTION, turn.id!)).then(r => console.log("Deleted ", r)).catch(e => console.log("Deleted error ", e))
-  }
-
-  function handleSave(): void {
-    if (turn.id)
-      updateDoc(doc(app.firestore, TURNS_COLLECTION, turn.id).withConverter(turnConverter), edit).then(r => {
-        console.log("save edited turn: ", r)
-        setEdit(undefined)
-      }).catch(e => {
-        console.error("error new turn: ", e)
-      })
-  }
-
-  function handleChange(value: string): void {
-    if (edit)
-      setEdit({ ...edit, date: getNewDateWithNewTime(edit, value) })
   }
 
   return (
@@ -60,33 +40,10 @@ function TurnItem({ turn }: TurnItemProps) {
           <Assignment />
         }
       </ListItemIcon>
-      {edit ?
-        <TextField
-          id="time"
-          label="Alarm clock"
-          type="time"
-          value={getTime(edit)}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          inputProps={{
-            step: 300, // 5 min
-          }}
-          sx={{ width: 150 }}
-          onChange={e => handleChange(e.target.value)}
-        />
-        :
         <ListItemText
           primary={`${getTime(turn)} hs`}
           secondary={turn.reservedBy ? `${turn.reservedBy.name} Tel: ${turn.reservedBy.phone}` : ""}
         />
-      }
-      {edit ?
-        <IconButton onClick={e => handleSave()} color="error" edge="end" aria-label="delete">
-          <Save />
-        </IconButton>
-        :
-        <>
           {turn.reservedBy &&
             <Link target="_blank" href={`https://wa.me/54${turn.reservedBy.phone}`}>
               <IconButton><WhatsApp color="success" /></IconButton>
@@ -98,8 +55,6 @@ function TurnItem({ turn }: TurnItemProps) {
           <IconButton onClick={e => handleRemove()} color="error" edge="end" aria-label="delete">
             <Delete />
           </IconButton>
-        </>
-      }
     </ListItem>
   )
 }
