@@ -18,3 +18,4 @@ const PRODUCTION = {
 };
 
 export const firebaseConfig = DEVELOPER;
+// export const firebaseConfig = PRODUCTION;
