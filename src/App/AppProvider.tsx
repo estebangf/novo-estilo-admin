@@ -14,7 +14,7 @@ function AppProvider({ children }: { children: React.ReactNode }) {
   const initLoad = () => setLoading(true)
   const finishLoad = () => setLoading(false)
 
-  const [title, setTitle] = useState("App")
+  const [title, setTitle] = useState("Novo Estilo")
 
   const firebase: FirebaseApp = initializeApp(firebaseConfig)
   const analytics: Analytics = getAnalytics(firebase)

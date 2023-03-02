@@ -98,6 +98,7 @@ function AppBarStyled({ setOpenDrawerMovile, setOpenDrawerDesktop, openDrawerDes
 
 
   const [notifications, setNotifications] = useState<NotificationModel[]>([]);
+  const [visiblesNotifications, setVisiblesNotifications] = useState(5);
   const [unReaded, setUnReaded] = useState<number>(0);
 
   const [anchorElNoty, setAnchorElNoty] = useState<null | HTMLElement>(null);
@@ -108,6 +109,7 @@ function AppBarStyled({ setOpenDrawerMovile, setOpenDrawerDesktop, openDrawerDes
   };
   const handleCloseNotifications = () => {
     setAnchorElNoty(null)
+    setVisiblesNotifications(5)
   };
 
 
@@ -223,19 +225,28 @@ function AppBarStyled({ setOpenDrawerMovile, setOpenDrawerDesktop, openDrawerDes
         onClose={handleCloseNotifications}
         PaperProps={{
           style: {
+            padding: 0,
             maxHeight: "75%",
           },
         }}
+        MenuListProps={{
+          style: {
+            padding: 0,
+          },
+        }}
       >
-        {notifications.map((notification, indexN) => {
-          return (<>
-            {indexN > 0 && <Divider className="Divider" />}
+        {notifications.slice(0, visiblesNotifications).map((notification, indexN) => {
+          return (
             <NotificationItem handleClick={handleCloseNotifications} notification={notification} />
-          </>)
+          )
         })}
-        {notifications.length == 0 &&
+        {notifications.length === 0 ? (
           <MenuItem>No tienes notificaciones.</MenuItem>
-        }
+        ) : notifications.length - 1 > visiblesNotifications ? (
+          <MenuItem onClick={() => setVisiblesNotifications(p => p + 5)}>Mostrar mas ...</MenuItem>
+        ) : (
+          <MenuItem>Fin de la lista</MenuItem>
+        )}
       </Menu>
     </ThemeProvider>
   );

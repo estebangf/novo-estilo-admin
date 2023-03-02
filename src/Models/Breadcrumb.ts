@@ -17,6 +17,7 @@ export const BREADCRUMBS: { [key: string]: string } = {
   ...newBreadcrumb("user", ""),
   ...newBreadcrumb("list", "Lista de turnos"),
   ...newBreadcrumb("today", "Agenda del dia"),
+  ...newBreadcrumb("month", "Agenda mensual"),
   ...newBreadcrumb("account", "Tu cuenta"),
   ...newBreadcrumb("admin", "Administración"),
 }

@@ -1,4 +1,4 @@
-import { MenuItem, Typography, IconButton, Button } from "@mui/material";
+import { MenuItem, Typography, IconButton } from "@mui/material";
 import React from "react";
 import MarkChatReadIcon from '@mui/icons-material/MarkChatRead';
 import NotificationModel, { NOTIFICATIONS_COLLECTION } from "../../Models/Notifications";
@@ -7,7 +7,6 @@ import LinkStyled from "../LinkStyled";
 
 import "./NotificationItem.css"
 import { useApp, useAuth } from "../../Tools/Hooks";
-import { resolve } from "dns";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 // import { getCurrentUser, seedNotification } from "../database/firebase-functions";
 
@@ -25,7 +24,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification, handl
     id,
     title,
     description,
-    // date,
+    date,
     url,
     createdBy,
     seedForUsers
@@ -40,7 +39,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification, handl
   }
 
   const seed = () => {
-    
+
     if (auth.user) return seedForUsers.includes(auth.user.uid)
     else return false
     return true

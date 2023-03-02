@@ -66,6 +66,7 @@ function TurnsList() {
     })
 
     setTurnsList([...dates])
+    setDateView(undefined)
   }, [turns, desde, hasta, viewReserveds, viewOpeneds])
 
   const handleChangeView = (index: number) => {

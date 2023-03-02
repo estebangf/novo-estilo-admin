@@ -36,39 +36,40 @@ const tarjetas = [
     link: "/turns/month",
     disabled: false,
     roles: ["admin"]
-  }, {
-    title: "Nuevo Movimiento",
-    subTitle: "Agregar un movimiento a la lista financiera.",
-    description: "Monto, description, etc.",
-    image: "/statics/imagens/menus/nuevo_movimiento.png",
-    link: "/movements/new",
-    disabled: true,
-    roles: ["admin"]
-  }, {
-    title: "Movimientos",
-    subTitle: "Estas son las transacciones de dinero del emprendimiento",
-    description: "Revisar, filtrar, etc.",
-    image: "/statics/imagens/menus/ver_movimientos.png",
-    link: "/movements/list",
-    disabled: true,
-    roles: ["admin"]
-  }, {
-    title: "Mi cuenta",
-    subTitle: "Tus datos e informacion",
-    description: "Aquí puedes encontrar tu informacion y datos personales que te identifican ante la distribuidora",
-    image: "/statics/imagens/menus/mi_cuenta.png",
-    link: "/account",
-    disabled: true,
-    roles: ["user"]
-  }, {
-    title: "Administracion",
-    subTitle: "Panel de cambios",
-    description: "Aquí podrá acceder a acciones privadas para gestionar su lista de productos",
-    image: "/statics/imagens/menus//administracion.png",
-    link: "/settings",
-    disabled: true,
-    roles: ["admin"]
-  }
+  },
+  // {
+  //   title: "Nuevo Movimiento",
+  //   subTitle: "Agregar un movimiento a la lista financiera.",
+  //   description: "Monto, description, etc.",
+  //   image: "/statics/imagens/menus/nuevo_movimiento.png",
+  //   link: "/movements/new",
+  //   disabled: true,
+  //   roles: ["admin"]
+  // }, {
+  //   title: "Movimientos",
+  //   subTitle: "Estas son las transacciones de dinero del emprendimiento",
+  //   description: "Revisar, filtrar, etc.",
+  //   image: "/statics/imagens/menus/ver_movimientos.png",
+  //   link: "/movements/list",
+  //   disabled: true,
+  //   roles: ["admin"]
+  // }, {
+  //   title: "Mi cuenta",
+  //   subTitle: "Tus datos e informacion",
+  //   description: "Aquí puedes encontrar tu informacion y datos personales que te identifican ante la distribuidora",
+  //   image: "/statics/imagens/menus/mi_cuenta.png",
+  //   link: "/account",
+  //   disabled: true,
+  //   roles: ["user"]
+  // }, {
+  //   title: "Administracion",
+  //   subTitle: "Panel de cambios",
+  //   description: "Aquí podrá acceder a acciones privadas para gestionar su lista de productos",
+  //   image: "/statics/imagens/menus//administracion.png",
+  //   link: "/settings",
+  //   disabled: true,
+  //   roles: ["admin"]
+  // }
 ]
 
 
