@@ -15,10 +15,10 @@ interface TurnItemProps {
   turn: Turn,
   handleEdit: () => void
 }
-function TurnItem({ turn, handleEdit }: TurnItemProps) {
+function TurnItem ({ turn, handleEdit }: TurnItemProps) {
   const app = useApp();
 
-  function handleRemove(): void {
+  function handleRemove (): void {
     if (window.confirm("¿Vas a borrar este turno?"))
       if (turn.reservedBy) {
         if (window.confirm("Este turno tiene una reserva, ¿Igual lo vas a borrar?"))
@@ -40,21 +40,21 @@ function TurnItem({ turn, handleEdit }: TurnItemProps) {
           <Assignment />
         }
       </ListItemIcon>
-        <ListItemText
-          primary={`${getTime(turn)} hs`}
-          secondary={turn.reservedBy ? `${turn.reservedBy.name} Tel: ${turn.reservedBy.phone}` : ""}
-        />
-          {turn.reservedBy &&
-            <Link target="_blank" href={`https://wa.me/54${turn.reservedBy.phone}`}>
-              <IconButton><WhatsApp color="success" /></IconButton>
-            </Link>
-          }
-          <IconButton onClick={e => handleEdit()} color="primary" aria-label="delete">
-            <Edit />
-          </IconButton>
-          <IconButton onClick={e => handleRemove()} color="error" edge="end" aria-label="delete">
-            <Delete />
-          </IconButton>
+      <ListItemText
+        primary={`${getTime(turn)} hs`}
+        secondary={turn.reservedBy ? `${turn.reservedBy.name} Tel: ${turn.reservedBy.phone}` : ""}
+      />
+      {turn.reservedBy &&
+        <Link target="_blank" href={`https://wa.me/${turn.reservedBy.phone.slice(1, 100)}`}>
+          <IconButton><WhatsApp color="success" /></IconButton>
+        </Link>
+      }
+      <IconButton onClick={e => handleEdit()} color="primary" aria-label="delete">
+        <Edit />
+      </IconButton>
+      <IconButton onClick={e => handleRemove()} color="error" edge="end" aria-label="delete">
+        <Delete />
+      </IconButton>
     </ListItem>
   )
 }

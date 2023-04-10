@@ -82,7 +82,7 @@ const generateTurn = (number: number) => {
     date: new Date(number),
     reservedBy: number % 2 == 0 ? {
       name: "Nombre y apellido...",
-      phone: 2944617548
+      phone: "+5490000000000"
     } : null,
     works: [],
     allowedWorks: []

@@ -116,7 +116,7 @@ const TurnsOfMont: React.FC = () => {
     });
   }, [])
 
-  function semanas() {
+  function semanas () {
     let ss: Dia[][] = []
     let ds: Dia[] = []
     let diaSemana = 0;
@@ -279,7 +279,7 @@ const TurnsOfMont: React.FC = () => {
                 </ListItem>
                 <ListItem sx={{ pt: 0, pl: 0 }}>
                   <ListItemIcon>
-                    <Link target="_blank" href={`https://wa.me/54${turnSelected.reservedBy.phone}`}>
+                    <Link target="_blank" href={`https://wa.me/${turnSelected.reservedBy.phone.slice(1, 100)}`}>
                       <WhatsApp fontSize='medium' color="success" />
                     </Link>
                   </ListItemIcon>
