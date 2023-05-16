@@ -23,3 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 /.firebase
+
+/src/Tools/firebase-app.ts
+.firebase/hosting.YnVpbGQ.cache
+src/Tools/firebase-app.ts
+src/Tools/firebase-app.ts
