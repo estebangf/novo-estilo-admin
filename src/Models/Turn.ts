@@ -67,7 +67,10 @@ const turnConverter = {
       id: snapshot.id,
       createdAt: data.createdAt.toDate(),
       date: data.date.toDate(),
-      reservedBy: data.reservedBy,
+      reservedBy: data.reservedBy ? {
+        name: data.reservedBy.name,
+        phone: typeof data.reservedBy.phone === 'number' ? `+54${data.reservedBy.phone}` : data.reservedBy.phone
+      } : data.reservedBy,
       works: data.works || [],
       allowedWorks: data.allowedWorks || []
     }
