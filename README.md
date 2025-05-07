@@ -1,7 +1,7 @@
 
 # Novo Estilo Admin
 
-**Novo Estilo Admin** es una aplicación web desarrollada con **Create React App**, **TypeScript** y **Firebase**. Su objetivo es proporcionar una interfaz administrativa para la gestión de contenidos y configuraciones del sitio web de Novo Estilo. Esta herramienta permite a los administradores actualizar información, gestionar usuarios y mantener el contenido del sitio de manera eficiente.
+**Novo Estilo Admin** es una aplicación web desarrollada con **Create React App**, **TypeScript** y **Firebase**. Su objetivo es proporcionar una interfaz administrativa para la gestión de turnos de una peluquería Novo Estilo. Esta herramienta permite a los administradores actualizar turnos disponibles y gestionar los ocupados, ver calendarios y administrarse mas eficientemente.
 
 ## Características
 
